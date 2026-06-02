@@ -13,15 +13,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('employees', EmployeeController::class);
 });
 
-
-
 Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
 
 Route::get('/attendance/test-connection', function () {
     set_time_limit(15);
-
     $zk = new \App\Services\ZktecoService();
-
     // Step 1: raw UDP reachability check (fast, 3s max)
     $reachable = $zk->isReachable();
     if (! $reachable) {
